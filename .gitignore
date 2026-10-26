@@ -1,0 +1,14 @@
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+
+# overnight 50 x 100k run: still in progress, add once finished
+simulation/results_full50/
+simulation/results_full50.log
+full_run.log
+FULL_RUN_STATUS.txt
+report/rebuild.log
+
+# report build scratch
+report/tools/build/
