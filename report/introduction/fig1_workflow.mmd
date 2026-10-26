@@ -1,0 +1,40 @@
+flowchart TD
+    req["Stochastic connection request r = (s, d, type)<br>Poisson arrivals, exponential holding times"]
+    cls["Classical request:<br>k candidate paths ranked by quantum-overlap cost; first-fit wavelength"]
+    qnt["Quantum request:<br>direct O-band lightpath; test QSNR ≥ Γ_Q + ε"]
+    aux["Layered auxiliary graph<br>conversion edges only at sparse O-E-O hubs (high betweenness)"]
+    rel["Trusted-relay chain s → r1 → … → d<br>keep the chain with the highest bottleneck SKR"]
+    adm["Admission: all active quantum channels keep QSNR ≥ Γ_Q + ε<br>launch power P = P_min(1 + m0); update network state"]
+    tel["SDN telemetry poll every Δt<br>QSNR_q, SNR_c,s, excess loss η_c,s"]
+    risk["At-risk channel:<br>compute noise reduction ΔN* and headroom H"]
+    rec["Hysteresis recovery:<br>raise throttled powers by Δp towards P_min(1 + m0)"]
+    l1["Level 1 (H ≥ ΔN*):<br>sensitivity-ordered power throttling"]
+    l2["Level 2:<br>make-before-break re-grooming of the dominant interferer"]
+    req -->|"classical"| cls
+    req -->|"quantum"| qnt
+    cls -->|"no continuous free wavelength"| aux
+    qnt -->|"reach or QSNR test fails"| rel
+    cls -->|"path found"| adm
+    qnt -->|"feasible"| adm
+    aux --> adm
+    rel --> adm
+    adm --> tel
+    tel -->|"QSNR < Γ_Q + ε"| risk
+    tel -->|"QSNR ≥ Γ_Q + ε + h"| rec
+    risk -->|"H ≥ ΔN*"| l1
+    risk -->|"H < ΔN*"| l2
+    l1 -->|"still at risk"| l2
+    l1 -->|"next Δt"| tel
+    l2 -->|"next Δt"| tel
+    rec -->|"next Δt"| tel
+    style req fill:#F2F2F2,stroke:#404040
+    style cls fill:#DCE6F2,stroke:#404040
+    style qnt fill:#DCE6F2,stroke:#404040
+    style aux fill:#DCE6F2,stroke:#404040
+    style rel fill:#DCE6F2,stroke:#404040
+    style adm fill:#E2EFDA,stroke:#404040
+    style tel fill:#FCE4D6,stroke:#404040
+    style risk fill:#FCE4D6,stroke:#404040
+    style rec fill:#FCE4D6,stroke:#404040
+    style l1 fill:#FCE4D6,stroke:#404040
+    style l2 fill:#FCE4D6,stroke:#404040
