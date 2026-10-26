@@ -1,0 +1,117 @@
+t_s,tag,message
+0.5,ARRIVE,req#10000 QUANTUM   2->6: 2-4-6 λq0 43.6 km QSNR=+2.11 dB + 3 C-band ctrl/data
+1.712954349843067,ARRIVE,req#0    classical 4->0: 4-0 λc0 @0.0016 mW
+1.8781052100875524,ARRIVE,req#1    classical 3->4: 3-1-4 λc3 @0.0023 mW
+1.9369988561017206,ARRIVE,req#2    classical 7->1: 7-0-4-1 λc1 @0.0124 mW
+4.462894987846651,ARRIVE,req#3    classical 7->3: 7-0-6-3 λc3 @0.0059 mW
+5.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00"
+5.603586460792212,DEPART,req#3    classical 7->3 released
+5.728606060525018,ARRIVE,req#4    classical 4->1: 4-1 λc0 @0.0007 mW
+10.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00"
+15.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00"
+18.52621018285587,DEPART,req#4    classical 4->1 released
+20.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00"
+22.340249553289404,ARRIVE,req#5    QUANTUM   6->1: 6-3-1 λq0 41.5 km QSNR=+3.46 dB + 3 C-band ctrl/data
+23.273806611860614,ARRIVE,req#6    classical 5->1: 5-3-6-0-4-1 λc6 @0.1408 mW
+25.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00"
+25.275838502862744,ARRIVE,req#7    classical 2->5: 2-1-4-6-3-5 λc7 @0.0316 mW
+28.024102963909638,ARRIVE,req#8    classical 2->7: 2-1-4-0-7 λc8 @0.0250 mW
+29.29176568090944,ARRIVE,req#9    QUANTUM   1->8 via 1 trusted relay(s): 1-4 λq0 23.2 km QSNR=+14.96 dB | 4-8 λq0 42.4 km QSNR=+2.86 dB + 3 C-band ctrl/data
+30.0,BURST,"+7 managed lightpaths on link 2-4 at 1.000 mW (external fast path, no admission check), hold 20.0 s"
+30.0,TELEM,"q#1 (2-4-6, 43.6 km) QSNR=-4.52 dB < guard -3.5 dB"
+30.0,L1,"headroom H=3.60e-04 >= ΔN*=9.67e-05: sensitivity-ordered throttling of 8 interferer(s), 22 step(s) of 0.5 dB"
+30.0,L1,    c#44 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#46 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#48 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#50 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#52 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#54 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+30.0,L1,    c#56 (burst) on 2-4: 1.0000 -> 0.7943 mW (-1.0 dB)
+30.0,L1,    c#27 (demand) on 2-1-4-6-3-5: 0.0316 -> 0.0266 mW (-0.8 dB)
+30.0,L1,q#1 QSNR now -3.45 dB
+30.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.45 dB, 8 co-propagating interferer(s), N_R=2.60e-04"
+31.809845419453787,DEPART,req#8    classical 2->7 released
+32.54427660423182,ARRIVE,req#10   classical 3->9: 3-6-0-7-9 λc3 @0.0081 mW
+34.74393276909109,ARRIVE,req#11   classical 3->2: 3-1-2 λc4 @0.0019 mW
+35.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.45 dB, 8 co-propagating interferer(s), N_R=2.60e-04"
+38.90973344239654,ARRIVE,req#12   classical 7->1: 7-0-4-2-1 λc8 @0.0202 mW
+40.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.45 dB, 9 co-propagating interferer(s), N_R=2.60e-04"
+40.14704663009927,ARRIVE,req#13   classical 1->8: 1-4-0-8 λc12 @0.0141 mW
+40.48417923147988,ARRIVE,req#14   classical 4->2: 4-2 λc7 @0.0006 mW
+45.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.45 dB, 10 co-propagating interferer(s), N_R=2.60e-04"
+45.68159644551203,DEPART,req#9    QUANTUM 1->8 released
+47.130446439104155,ARRIVE,req#15   QUANTUM   4->2: 4-2 λq1 17.6 km QSNR=+13.17 dB + 3 C-band ctrl/data
+48.178006764793956,ARRIVE,req#16   classical 1->8: 1-4-8 λc0 @0.0035 mW
+48.20083550839939,ARRIVE,req#17   classical 3->1: 3-6-0-4-1 λc13 @0.0245 mW
+49.84036551375649,ARRIVE,req#18   classical 5->0: 5-3-6-0 λc8 @0.0107 mW
+50.0,BURST,-7 burst lightpaths released (originally on 2-4)
+50.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.09 dB, 3 co-propagating interferer(s), N_R=3.74e-07"
+53.026814905818995,ARRIVE,req#19   classical 8->9: 8-0-7-9 λc0 @0.0045 mW
+54.934462867127735,DEPART,req#13   classical 1->8 released
+55.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.09 dB, 3 co-propagating interferer(s), N_R=3.88e-07"
+55.61594985621698,ARRIVE,req#20   classical 5->1: 5-3-6-0-4-1 λc12 @0.1439 mW
+56.470081312035234,DEPART,req#19   classical 8->9 released
+56.57510545315055,ARRIVE,req#21   classical 9->8: 9-7-0-8 λc0 @0.0046 mW
+58.75085919505011,DEPART,req#15   QUANTUM 4->2 released
+59.17219373686172,ARRIVE,req#22   QUANTUM   6->8 via 1 trusted relay(s): 6-0 λq0 38.3 km QSNR=+5.29 dB | 0-8 λq0 34.0 km QSNR=+8.23 dB + 3 C-band ctrl/data
+60.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.07 dB, 6 co-propagating interferer(s), N_R=9.56e-07"
+60.492606757411224,BLOCK,req#23   QUANTUM 5->1: no O-band path meeting QSNR (reach/noise) [cause: reach]
+60.521563708610685,ARRIVE,req#24   QUANTUM   2->6: 2-4-6 λq1 43.6 km QSNR=+2.06 dB + 3 C-band ctrl/data
+61.17890377896353,ARRIVE,req#25   classical 6->7: 6-4-0-7 λc14 @0.0132 mW
+62.36615560066471,DEPART,req#5    QUANTUM 6->1 released
+63.016065728516615,DEPART,req#1    classical 3->4 released
+64.19452950913428,ARRIVE,req#26   classical 9->1: 9-7-0-4-1 λc2 @0.0166 mW
+64.48116056792226,ARRIVE,req#27   classical 3->6: 3-6 λc4 @0.0004 mW
+65.0,BURST,"+9 fixed-power lightpaths on link 2-4 at 1.000 mW (external fast path, no admission check), hold 25.0 s"
+65.0,TELEM,"q#1 (2-4-6, 43.6 km) QSNR=-5.41 dB < guard -3.5 dB"
+65.0,L1,"headroom H=2.76e-07 < ΔN*=2.01e-04: throttling cannot restore q#1, escalating"
+65.0,L2,"MBB re-groom c#118 (burst, top interferer κP=5.15e-05)"
+65.0,L2,    MAKE  2-1-4 λc3 @1.0000 mW
+65.0,L2,    BREAK 2-4 λc0 @1.0000 mW
+65.0,L2,q#1 QSNR now -5.00 dB
+65.0,L2,"MBB re-groom c#120 (burst, top interferer κP=5.15e-05)"
+65.0,L2,    MAKE  2-1-4 λc5 @1.0000 mW
+65.0,L2,    BREAK 2-4 λc1 @1.0000 mW
+65.0,L2,q#1 QSNR now -4.54 dB
+65.0,L2,"MBB re-groom c#122 (burst, top interferer κP=5.15e-05)"
+65.0,L2,    MAKE  2-1-4 λc14 @1.0000 mW
+65.0,L2,    BREAK 2-4 λc2 @1.0000 mW
+65.0,L2,q#1 QSNR now -4.02 dB
+65.0,L2,"MBB re-groom c#124 (burst, top interferer κP=5.15e-05)"
+65.0,L2,    MAKE  2-1-4 λc15 @1.0000 mW
+65.0,L2,    BREAK 2-4 λc3 @1.0000 mW
+65.0,L2,q#1 QSNR now -3.44 dB
+65.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.44 dB, 15 co-propagating interferer(s), N_R=2.59e-04"
+66.45363602261556,DEPART,req#20   classical 5->1 released
+68.66149180812374,DEPART,req#6    classical 5->1 released
+69.73139316266742,ARRIVE,req#28   classical 3->2: 3-1-2 λc6 @0.0019 mW
+70.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.44 dB, 15 co-propagating interferer(s), N_R=2.59e-04"
+70.2698013630372,DEPART,req#28   classical 3->2 released
+70.76827652343118,ARRIVE,req#29   classical 3->9: 3-1-4-0-7-9 λc6 @0.0588 mW
+71.1533495579464,DEPART,req#25   classical 6->7 released
+72.84589008927932,ARRIVE,req#30   QUANTUM   3->9 via 1 trusted relay(s): 3-6-0 λq1 48.1 km QSNR=-0.84 dB | 0-7-9 λq0 38.6 km QSNR=+5.18 dB + 3 C-band ctrl/data
+74.66837558338871,ARRIVE,req#31   classical 0->5: 0-4-1-3-5 λc18 @0.0789 mW
+74.82470137007633,DEPART,req#11   classical 3->2 released
+75.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.43 dB, 14 co-propagating interferer(s), N_R=2.58e-04"
+75.49449551117695,DEPART,req#24   QUANTUM 2->6 released
+76.88525474457172,ARRIVE,req#32   classical 1->4: 1-4 λc4 @0.0007 mW
+80.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.43 dB, 11 co-propagating interferer(s), N_R=2.58e-04"
+81.05044412727618,ARRIVE,req#33   classical 6->0: 6-3-1-4-0 λc9 @0.0188 mW
+81.69331694917531,ARRIVE,req#34   QUANTUM   2->8 via 1 trusted relay(s): 2-4 λq1 17.6 km QSNR=+13.19 dB | 4-8 λq0 42.4 km QSNR=+2.85 dB + 3 C-band ctrl/data
+82.68714532800544,DEPART,req#17   classical 3->1 released
+85.0,QSNR,"monitored q#1 2-4-6: QSNR=-3.43 dB, 11 co-propagating interferer(s), N_R=2.58e-04"
+86.20880439144955,DEPART,req#14   classical 4->2 released
+87.0706745132384,ARRIVE,req#35   classical 3->4: 3-1-4 λc8 @0.0024 mW
+87.79958324188186,BLOCK,req#36   QUANTUM 0->5: no O-band path meeting QSNR (reach/noise) [cause: reach]
+88.57728353242057,ARRIVE,req#37   classical 7->4: 7-0-4 λc4 @0.0048 mW
+89.0429814994815,ARRIVE,req#38   QUANTUM   1->7 via 2 trusted relay(s): 1-4 λq0 23.2 km QSNR=+12.00 dB | 4-0 λq0 44.2 km QSNR=+1.57 dB | 0-7 λq1 30.0 km QSNR=+10.70 dB + 3 C-band ctrl/data
+89.13266590118296,DEPART,req#35   classical 3->4 released
+90.0,BURST,-9 burst lightpaths released (originally on 2-4)
+90.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.07 dB, 5 co-propagating interferer(s), N_R=9.28e-07"
+91.2274048513111,ARRIVE,req#39   classical 1->5: 1-3-5 λc3 @0.0056 mW
+93.5834651659546,DEPART,req#10   classical 3->9 released
+94.62959275084776,ARRIVE,req#40   classical 3->9: 3-6-0-7-9 λc3 @0.0081 mW
+95.0,QSNR,"monitored q#1 2-4-6: QSNR=+2.07 dB, 5 co-propagating interferer(s), N_R=9.28e-07"
+96.03828701632739,DEPART,req#40   classical 3->9 released
+98.02414806095867,ARRIVE,req#41   QUANTUM   3->9 via 1 trusted relay(s): 3-6-0 λq2 48.1 km QSNR=-0.89 dB | 0-7-9 λq2 38.6 km QSNR=+5.16 dB + 3 C-band ctrl/data
+99.2949394183015,ARRIVE,req#42   classical 0->1: 0-6-3-1 λc15 @0.0062 mW

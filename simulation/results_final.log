@@ -1,0 +1,231 @@
+T-DPC-RWA simulator | mode=full | realisations=10 | loads=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100] | 2000 warm-up + 20000 measured requests per run | 11 worker process(es)
+Mean nodal degree over these realisations: Gabriel-20 3.20, Waxman-20 5.26
+
+Table 1: Physical-layer and control-plane parameters used in the discrete-event simulations
+╒════════════════════════════════╤═════════════════════════════════════════════════════════════════════════════╤═══════════════════════╕
+│ Parameter                      │ Value / range                                                               │ Reference             │
+╞════════════════════════════════╪═════════════════════════════════════════════════════════════════════════════╪═══════════════════════╡
+│ Optical wavebands              │ Quantum: O-band (1310 nm, CWDM) | Classical: C-band (1550 nm, DWDM 100 GHz) │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Wavelength capacity per fibre  │ W_q = 10, W_c = 40 (W_T = 50)                                               │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Fibre attenuation              │ α_q = 0.32 dB/km (0.0737 Np/km) | α_c = 0.17 dB/km (0.0391 Np/km)           │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Raman coupling & Rx filter     │ β_q = 1e-12 km^-1 (100 GHz), γ_nl = 0.000225                                │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ SPD efficiency & noise         │ η_D = 0.1, p_d = N_F = 0.0001 per 10 ns gate, V = 0.98                      │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Classical receiver sensitivity │ -36.8 dBm minimum reception power                                           │ Base paper            │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ QSNR thresholds & guard band   │ Γ_Q = -5.0 dB | ε = 1.5 dB (trigger -3.5 dB) | h = 0.5 dB                   │ Proposed work         │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Dynamic power-control margins  │ m_0 = 0.25, m_floor = 0.05, Δp = 0.5 dB, Δt = 1.0 s                         │ Proposed work         │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Sparse O-E-O & trusted relays  │ K = 4 hubs (R = 16), |T| = 3, M_max = 3 (20-node); K = 2, |T| = 2 (10-node) │ Proposed work         │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Stochastic traffic profile     │ Poisson arrivals, 1/μ = 60 s, A ∈ [10, 100] Erl, f_q = 0.3                  │ Proposed work         │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┼───────────────────────┤
+│ Classical traffic bursts       │ 1 per 45 s, 3-6 ch @ 1.0 mW, 40% fixed-power, mean 20 s                     │ Simulation assumption │
+╘════════════════════════════════╧═════════════════════════════════════════════════════════════════════════════╧═══════════════════════╛
+
+====================================================================================================
+ LIVE TELEMETRY TRACE: Full T-DPC-RWA on a 10-node Gabriel graph (seed 1)
+====================================================================================================
+ Monitored QKD link 2->6 on path 2-4-6 (43.6 km), clean QSNR +2.11 dB
+ Bottleneck link 2-4 (17.6 km), kappa=5.15e-05 per mW
+ Background traffic: 20 Erlang. Burst 1 at t=30 s: 7 managed channels. Burst 2 at t=65 s: 9 fixed-power channels.
+ Guard Γ_Q+ε = -3.5 dB, outage Γ_Q = -5.0 dB, hysteresis h = 0.5 dB
+
+[t=   0.50s] ARRIVE req#10000 QUANTUM   2->6: 2-4-6 λq0 43.6 km QSNR=+2.11 dB + 3 C-band ctrl/data
+[t=   1.71s] ARRIVE req#0    classical 4->0: 4-0 λc0 @0.0016 mW
+[t=   1.88s] ARRIVE req#1    classical 3->4: 3-1-4 λc3 @0.0023 mW
+[t=   1.94s] ARRIVE req#2    classical 7->1: 7-0-4-1 λc1 @0.0124 mW
+[t=   4.46s] ARRIVE req#3    classical 7->3: 7-0-6-3 λc3 @0.0059 mW
+[t=   5.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00
+[t=   5.60s] DEPART req#3    classical 7->3 released
+[t=   5.73s] ARRIVE req#4    classical 4->1: 4-1 λc0 @0.0007 mW
+[t=  10.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00
+[t=  15.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00
+[t=  18.53s] DEPART req#4    classical 4->1 released
+[t=  20.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00
+[t=  22.34s] ARRIVE req#5    QUANTUM   6->1: 6-3-1 λq0 41.5 km QSNR=+3.46 dB + 3 C-band ctrl/data
+[t=  23.27s] ARRIVE req#6    classical 5->1: 5-3-6-0-4-1 λc6 @0.1408 mW
+[t=  25.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.11 dB, 0 co-propagating interferer(s), N_R=0.00e+00
+[t=  25.28s] ARRIVE req#7    classical 2->5: 2-1-4-6-3-5 λc7 @0.0316 mW
+[t=  28.02s] ARRIVE req#8    classical 2->7: 2-1-4-0-7 λc8 @0.0250 mW
+[t=  29.29s] ARRIVE req#9    QUANTUM   1->8 via 1 trusted relay(s): 1-4 λq0 23.2 km QSNR=+14.96 dB | 4-8 λq0 42.4 km QSNR=+2.86 dB + 3 C-band ctrl/data
+[t=  30.00s] BURST  +7 managed lightpaths on link 2-4 at 1.000 mW (external fast path, no admission check), hold 20.0 s
+[t=  30.00s] TELEM  q#1 (2-4-6, 43.6 km) QSNR=-4.52 dB < guard -3.5 dB
+[t=  30.00s] L1     headroom H=3.60e-04 >= ΔN*=9.67e-05: sensitivity-ordered throttling of 8 interferer(s), 22 step(s) of 0.5 dB
+[t=  30.00s] L1         c#44 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#46 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#48 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#50 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#52 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#54 (burst) on 2-4: 1.0000 -> 0.7079 mW (-1.5 dB)
+[t=  30.00s] L1         c#56 (burst) on 2-4: 1.0000 -> 0.7943 mW (-1.0 dB)
+[t=  30.00s] L1         c#27 (demand) on 2-1-4-6-3-5: 0.0316 -> 0.0266 mW (-0.8 dB)
+[t=  30.00s] L1     q#1 QSNR now -3.45 dB
+[t=  30.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.45 dB, 8 co-propagating interferer(s), N_R=2.60e-04
+[t=  31.81s] DEPART req#8    classical 2->7 released
+[t=  32.54s] ARRIVE req#10   classical 3->9: 3-6-0-7-9 λc3 @0.0081 mW
+[t=  34.74s] ARRIVE req#11   classical 3->2: 3-1-2 λc4 @0.0019 mW
+[t=  35.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.45 dB, 8 co-propagating interferer(s), N_R=2.60e-04
+[t=  38.91s] ARRIVE req#12   classical 7->1: 7-0-4-2-1 λc8 @0.0202 mW
+[t=  40.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.45 dB, 9 co-propagating interferer(s), N_R=2.60e-04
+[t=  40.15s] ARRIVE req#13   classical 1->8: 1-4-0-8 λc12 @0.0141 mW
+[t=  40.48s] ARRIVE req#14   classical 4->2: 4-2 λc7 @0.0006 mW
+[t=  45.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.45 dB, 10 co-propagating interferer(s), N_R=2.60e-04
+[t=  45.68s] DEPART req#9    QUANTUM 1->8 released
+[t=  47.13s] ARRIVE req#15   QUANTUM   4->2: 4-2 λq1 17.6 km QSNR=+13.17 dB + 3 C-band ctrl/data
+[t=  48.18s] ARRIVE req#16   classical 1->8: 1-4-8 λc0 @0.0035 mW
+[t=  48.20s] ARRIVE req#17   classical 3->1: 3-6-0-4-1 λc13 @0.0245 mW
+[t=  49.84s] ARRIVE req#18   classical 5->0: 5-3-6-0 λc8 @0.0107 mW
+[t=  50.00s] BURST  -7 burst lightpaths released (originally on 2-4)
+[t=  50.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.09 dB, 3 co-propagating interferer(s), N_R=3.74e-07
+[t=  53.03s] ARRIVE req#19   classical 8->9: 8-0-7-9 λc0 @0.0045 mW
+[t=  54.93s] DEPART req#13   classical 1->8 released
+[t=  55.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.09 dB, 3 co-propagating interferer(s), N_R=3.88e-07
+[t=  55.62s] ARRIVE req#20   classical 5->1: 5-3-6-0-4-1 λc12 @0.1439 mW
+[t=  56.47s] DEPART req#19   classical 8->9 released
+[t=  56.58s] ARRIVE req#21   classical 9->8: 9-7-0-8 λc0 @0.0046 mW
+[t=  58.75s] DEPART req#15   QUANTUM 4->2 released
+[t=  59.17s] ARRIVE req#22   QUANTUM   6->8 via 1 trusted relay(s): 6-0 λq0 38.3 km QSNR=+5.29 dB | 0-8 λq0 34.0 km QSNR=+8.23 dB + 3 C-band ctrl/data
+[t=  60.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.07 dB, 6 co-propagating interferer(s), N_R=9.56e-07
+[t=  60.49s] BLOCK  req#23   QUANTUM 5->1: no O-band path meeting QSNR (reach/noise) [cause: reach]
+[t=  60.52s] ARRIVE req#24   QUANTUM   2->6: 2-4-6 λq1 43.6 km QSNR=+2.06 dB + 3 C-band ctrl/data
+[t=  61.18s] ARRIVE req#25   classical 6->7: 6-4-0-7 λc14 @0.0132 mW
+[t=  62.37s] DEPART req#5    QUANTUM 6->1 released
+[t=  63.02s] DEPART req#1    classical 3->4 released
+[t=  64.19s] ARRIVE req#26   classical 9->1: 9-7-0-4-1 λc2 @0.0166 mW
+[t=  64.48s] ARRIVE req#27   classical 3->6: 3-6 λc4 @0.0004 mW
+[t=  65.00s] BURST  +9 fixed-power lightpaths on link 2-4 at 1.000 mW (external fast path, no admission check), hold 25.0 s
+[t=  65.00s] TELEM  q#1 (2-4-6, 43.6 km) QSNR=-5.41 dB < guard -3.5 dB
+[t=  65.00s] L1     headroom H=2.76e-07 < ΔN*=2.01e-04: throttling cannot restore q#1, escalating
+[t=  65.00s] L2     MBB re-groom c#118 (burst, top interferer κP=5.15e-05)
+[t=  65.00s] L2         MAKE  2-1-4 λc3 @1.0000 mW
+[t=  65.00s] L2         BREAK 2-4 λc0 @1.0000 mW
+[t=  65.00s] L2     q#1 QSNR now -5.00 dB
+[t=  65.00s] L2     MBB re-groom c#120 (burst, top interferer κP=5.15e-05)
+[t=  65.00s] L2         MAKE  2-1-4 λc5 @1.0000 mW
+[t=  65.00s] L2         BREAK 2-4 λc1 @1.0000 mW
+[t=  65.00s] L2     q#1 QSNR now -4.54 dB
+[t=  65.00s] L2     MBB re-groom c#122 (burst, top interferer κP=5.15e-05)
+[t=  65.00s] L2         MAKE  2-1-4 λc14 @1.0000 mW
+[t=  65.00s] L2         BREAK 2-4 λc2 @1.0000 mW
+[t=  65.00s] L2     q#1 QSNR now -4.02 dB
+[t=  65.00s] L2     MBB re-groom c#124 (burst, top interferer κP=5.15e-05)
+[t=  65.00s] L2         MAKE  2-1-4 λc15 @1.0000 mW
+[t=  65.00s] L2         BREAK 2-4 λc3 @1.0000 mW
+[t=  65.00s] L2     q#1 QSNR now -3.44 dB
+[t=  65.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.44 dB, 15 co-propagating interferer(s), N_R=2.59e-04
+[t=  66.45s] DEPART req#20   classical 5->1 released
+[t=  68.66s] DEPART req#6    classical 5->1 released
+[t=  69.73s] ARRIVE req#28   classical 3->2: 3-1-2 λc6 @0.0019 mW
+[t=  70.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.44 dB, 15 co-propagating interferer(s), N_R=2.59e-04
+[t=  70.27s] DEPART req#28   classical 3->2 released
+[t=  70.77s] ARRIVE req#29   classical 3->9: 3-1-4-0-7-9 λc6 @0.0588 mW
+[t=  71.15s] DEPART req#25   classical 6->7 released
+[t=  72.85s] ARRIVE req#30   QUANTUM   3->9 via 1 trusted relay(s): 3-6-0 λq1 48.1 km QSNR=-0.84 dB | 0-7-9 λq0 38.6 km QSNR=+5.18 dB + 3 C-band ctrl/data
+[t=  74.67s] ARRIVE req#31   classical 0->5: 0-4-1-3-5 λc18 @0.0789 mW
+[t=  74.82s] DEPART req#11   classical 3->2 released
+[t=  75.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.43 dB, 14 co-propagating interferer(s), N_R=2.58e-04
+[t=  75.49s] DEPART req#24   QUANTUM 2->6 released
+[t=  76.89s] ARRIVE req#32   classical 1->4: 1-4 λc4 @0.0007 mW
+[t=  80.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.43 dB, 11 co-propagating interferer(s), N_R=2.58e-04
+[t=  81.05s] ARRIVE req#33   classical 6->0: 6-3-1-4-0 λc9 @0.0188 mW
+[t=  81.69s] ARRIVE req#34   QUANTUM   2->8 via 1 trusted relay(s): 2-4 λq1 17.6 km QSNR=+13.19 dB | 4-8 λq0 42.4 km QSNR=+2.85 dB + 3 C-band ctrl/data
+[t=  82.69s] DEPART req#17   classical 3->1 released
+[t=  85.00s] QSNR   monitored q#1 2-4-6: QSNR=-3.43 dB, 11 co-propagating interferer(s), N_R=2.58e-04
+[t=  86.21s] DEPART req#14   classical 4->2 released
+[t=  87.07s] ARRIVE req#35   classical 3->4: 3-1-4 λc8 @0.0024 mW
+[t=  87.80s] BLOCK  req#36   QUANTUM 0->5: no O-band path meeting QSNR (reach/noise) [cause: reach]
+[t=  88.58s] ARRIVE req#37   classical 7->4: 7-0-4 λc4 @0.0048 mW
+[t=  89.04s] ARRIVE req#38   QUANTUM   1->7 via 2 trusted relay(s): 1-4 λq0 23.2 km QSNR=+12.00 dB | 4-0 λq0 44.2 km QSNR=+1.57 dB | 0-7 λq1 30.0 km QSNR=+10.70 dB + 3 C-band ctrl/data
+[t=  89.13s] DEPART req#35   classical 3->4 released
+[t=  90.00s] BURST  -9 burst lightpaths released (originally on 2-4)
+[t=  90.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.07 dB, 5 co-propagating interferer(s), N_R=9.28e-07
+[t=  91.23s] ARRIVE req#39   classical 1->5: 1-3-5 λc3 @0.0056 mW
+[t=  93.58s] DEPART req#10   classical 3->9 released
+[t=  94.63s] ARRIVE req#40   classical 3->9: 3-6-0-7-9 λc3 @0.0081 mW
+[t=  95.00s] QSNR   monitored q#1 2-4-6: QSNR=+2.07 dB, 5 co-propagating interferer(s), N_R=9.28e-07
+[t=  96.04s] DEPART req#40   classical 3->9 released
+[t=  98.02s] ARRIVE req#41   QUANTUM   3->9 via 1 trusted relay(s): 3-6-0 λq2 48.1 km QSNR=-0.89 dB | 0-7-9 λq2 38.6 km QSNR=+5.16 dB + 3 C-band ctrl/data
+[t=  99.29s] ARRIVE req#42   classical 0->1: 0-6-3-1 λc15 @0.0062 mW
+
+ Trace: 1 Level-1 throttling action(s), 4 Level-2 MBB re-groom(s), 0 classical repair(s), 3 recovery step(s).
+ Monitored link below Γ_Q: T-DPC-RWA 0.0% of ticks vs static MQCCO+PC 25.3% of ticks.
+
+Running 780 simulations ...
+... done in 1543.4 s
+
+Table 2: Factorial ablation across 20-node Gabriel and Waxman topologies at 80 Erlang (QSNR, outage, SKR and power pooled over both topologies)
+╒══════════════════════════════════════╤═════════╤═════════╤══════════╤═════════════════╤════════════════╤═════════════╤═════════════════╤═══════════════╤═══════════════╕
+│ Model configuration                  │ T-DPC   │ O-E-O   │ Relays   │   RBR (Gabriel) │   RBR (Waxman) │ Mean QSNR   │ Outage time %   │   SKR (×10⁻³) │ Power saved   │
+╞══════════════════════════════════════╪═════════╪═════════╪══════════╪═════════════════╪════════════════╪═════════════╪═════════════════╪═══════════════╪═══════════════╡
+│ 1. Baseline SP-FF (No Power Control) │ Off     │ K = 0   │ |T| = 0  │          0.209  │         0.2358 │ 4.1 dB      │ 1.08%           │          0.59 │ 0.00%         │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 2. Base Paper MQDO + Static PC       │ Static  │ K = 0   │ |T| = 0  │          0.1751 │         0.222  │ 7.1 dB      │ 1.40%           │          0.65 │ 98.92%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 3. Base Paper MQCCO + Static PC      │ Static  │ K = 0   │ |T| = 0  │          0.1751 │         0.222  │ 7.1 dB      │ 1.40%           │          0.65 │ 98.92%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 4. Base Paper QTD (Strict Disjoint)  │ Static  │ K = 0   │ |T| = 0  │          0.3823 │         0.2786 │ 8.3 dB      │ 1.58%           │          0.81 │ 99.00%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 5. Proposed: T-DPC Loop Only         │ Active  │ K = 0   │ |T| = 0  │          0.1777 │         0.2282 │ 8.1 dB      │ 0.02%           │          0.7  │ 98.67%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 6. Proposed: Sparse O-E-O Only       │ Static  │ K = 4   │ |T| = 0  │          0.1729 │         0.2217 │ 7.1 dB      │ 1.40%           │          0.65 │ 98.91%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 7. Proposed: Trusted Relays Only     │ Static  │ K = 0   │ |T| = 3  │          0.0754 │         0.1195 │ 7.0 dB      │ 1.15%           │          0.35 │ 98.76%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 8. Proposed: T-DPC + Sparse O-E-O    │ Active  │ K = 4   │ |T| = 0  │          0.1772 │         0.2281 │ 8.1 dB      │ 0.02%           │          0.7  │ 98.67%        │
+├──────────────────────────────────────┼─────────┼─────────┼──────────┼─────────────────┼────────────────┼─────────────┼─────────────────┼───────────────┼───────────────┤
+│ 9. Full Proposed T-DPC-RWA Framework │ Active  │ K = 4   │ |T| = 3  │          0.0704 │         0.1336 │ 8.0 dB      │ 0.04%           │          0.37 │ 98.44%        │
+╘══════════════════════════════════════╧═════════╧═════════╧══════════╧═════════════════╧════════════════╧═════════════╧═════════════════╧═══════════════╧═══════════════╛
+
+Table 2 (supplementary columns): blocking causes, network key throughput, compute time
+╒══════════════════════════════════════╤════════════╤════════╤═════════╤═════════════════╤═══════════════════════╤═══════════════════════╤════════════════╕
+│ Model configuration                  │   Spectrum │   QSNR │   Reach │   Classical RBR │   Network SKR (×10⁻³) │ Classical SNR viol.   │   ms / request │
+╞══════════════════════════════════════╪════════════╪════════╪═════════╪═════════════════╪═══════════════════════╪═══════════════════════╪════════════════╡
+│ 1. Baseline SP-FF (No Power Control) │     0      │ 0.0301 │  0.1923 │          0.0065 │                  3.92 │ 0.00%                 │           0.21 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 2. Base Paper MQDO + Static PC       │     0.0001 │ 0.0062 │  0.1923 │          0.0064 │                  5.63 │ 51.54%                │           0.27 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 3. Base Paper MQCCO + Static PC      │     0.0001 │ 0.0062 │  0.1923 │          0.0064 │                  5.63 │ 51.51%                │           0.27 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 4. Base Paper QTD (Strict Disjoint)  │     0.137  │ 0.0011 │  0.1923 │          0.1341 │                  3.9  │ 51.17%                │           0.18 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 5. Proposed: T-DPC Loop Only         │     0.0001 │ 0.0019 │  0.201  │          0.0011 │                  5.63 │ 0.00%                 │           0.27 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 6. Proposed: Sparse O-E-O Only       │     0      │ 0.005  │  0.1923 │          0.0046 │                  5.63 │ 51.41%                │           0.3  │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 7. Proposed: Trusted Relays Only     │     0.0028 │ 0.0089 │  0.0858 │          0.0102 │                  5.99 │ 51.89%                │           1.28 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 8. Proposed: T-DPC + Sparse O-E-O    │     0      │ 0.0017 │  0.201  │          0.0007 │                  5.63 │ 0.00%                 │           0.28 │
+├──────────────────────────────────────┼────────────┼────────┼─────────┼─────────────────┼───────────────────────┼───────────────────────┼────────────────┤
+│ 9. Full Proposed T-DPC-RWA Framework │     0.0013 │ 0.002  │  0.0987 │          0.0017 │                  6.09 │ 0.00%                 │           1.31 │
+╘══════════════════════════════════════╧════════════╧════════╧═════════╧═════════════════╧═══════════════════════╧═══════════════════════╧════════════════╛
+
+Fig. 4(b) data: classical RBR vs O-E-O hubs K (20-node Gabriel, 250 Erl)
+╒══════════════════╤═══════════════╤══════════╤═══════════════════════════╕
+│ K                │   Betweenness │   Random │   Traffic-weighted degree │
+╞══════════════════╪═══════════════╪══════════╪═══════════════════════════╡
+│ 0                │        0.1012 │   0.1012 │                    0.1012 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 1                │        0.0655 │   0.0689 │                    0.0648 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 2                │        0.059  │   0.0655 │                    0.0623 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 3                │        0.0558 │   0.0627 │                    0.0607 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 4                │        0.0531 │   0.0636 │                    0.0599 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 5                │        0.0532 │   0.0624 │                    0.0588 │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ 6                │        0.0524 │   0.0624 │                    0.057  │
+├──────────────────┼───────────────┼──────────┼───────────────────────────┤
+│ Full (all nodes) │        0.0473 │   0.0473 │                    0.0473 │
+╘══════════════════╧═══════════════╧══════════╧═══════════════════════════╛
+
+Figures (report numbering): fig1_rbr.png = Fig. 2, fig2_qsnr_skr.png = Fig. 3, fig3_telemetry_oeo.png = Fig. 4, in results_final/
+CSV: table2_ablation.csv, sweep_results.csv, oeo_k_sweep.csv, raw_runs.csv, demo_trace.csv, demo_events.csv
+Total wall time 1545.4 s
