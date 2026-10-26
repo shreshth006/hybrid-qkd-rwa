@@ -1,0 +1,6 @@
+numpy
+scipy
+networkx
+simpy
+matplotlib
+tabulate
