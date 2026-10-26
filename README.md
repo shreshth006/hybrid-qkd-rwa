@@ -2,6 +2,13 @@
 
 Dynamic Routing and Wavelength Assignment for Hybrid QKD Networks with Adaptive Power Control and Sparse Wavelength Conversion. It extends Ruiz & Garcia-Escartin, *Computer Communications* 256 (2026) 108572.
 
+## Team
+
+- Ayush Sinha (24BCI0119)
+- Shreshth Mishra (24BCI0081)
+
+## Contents
+
 | Folder | Contents |
 |---|---|
 | `simulation/` | Discrete-event simulator (`tdpc_rwa_simulator.py`), results, figures, `verify_values.py`, `TRACEABILITY.md` |
