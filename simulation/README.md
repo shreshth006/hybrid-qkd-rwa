@@ -5,7 +5,7 @@ A discrete-event simulator for **Dynamic Routing and Wavelength Assignment for H
 ## Setup and run
 
 ```bash
-cd ~/Desktop/Projects/Jabali/simulation
+cd hybrid-qkd-rwa/simulation
 .venv/bin/pip install -r requirements.txt          # the venv already exists on this machine
 .venv/bin/python tdpc_rwa_simulator.py --mode demo # ~22 s on 12 cores
 .venv/bin/python tdpc_rwa_simulator.py --mode full # 50 realisations, 10k warm-up + 100k requests per run

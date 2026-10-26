@@ -2,7 +2,7 @@
 # Runs the report's full protocol (50 realisations x 100,000 measured requests),
 # then rebuilds the report from those results. Progress: tail -f full_run.log
 set -u
-J="$HOME/Desktop/Projects/Jabali"
+J="$HOME/Desktop/Projects/hybrid-qkd-rwa"
 SIM="$J/simulation"
 TOOLS="$J/report/tools"
 export PANDOC="$SIM/.venv/lib/python3.13/site-packages/pypandoc/files/pandoc"
